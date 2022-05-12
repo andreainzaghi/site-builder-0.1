@@ -3,15 +3,15 @@ let moveable;
 document.body.addEventListener('click', (event) => {
 
     const idElement = event.target.id
+
     if (event.target.tagName === 'BODY' && moveable) {
         moveable.destroy()
         return
     }
 
     moveable = new Moveable(document.body, {
-        target: document.querySelector(`#${idElement}`),
+        target: document.getElementById(`${idElement}`),
         // If the container is null, the position is fixed. (default: parentElement(document.body))
-
         container: document.body,
         draggable: true,
         resizable: true,
@@ -42,9 +42,8 @@ document.body.addEventListener('click', (event) => {
     }) => {
         console.log("onDrag left, top", left, top);
         target.style.left = `${left}px`;
-        target.style.position = "absolute"
+        // target.style.position = "absolute";
         target.style.top = `${top}px`;
-
         // console.log("onDrag translate", dist);
         // target.style.transform = transform;
     }).on("dragEnd", ({ target, isDrag, clientX, clientY }) => {
@@ -57,7 +56,7 @@ document.body.addEventListener('click', (event) => {
 
     }).on("resize", ({ target, width, height, dist, delta, clientX, clientY }) => {
         console.log("onResize", event.target);
-
+        // target.style.position = "absolute";
         delta[0] && (target.style.width = `${width}px`);
         delta[1] && (target.style.height = `${height}px`);
     }).on("resizeEnd", ({ target, isDrag, clientX, clientY }) => {
@@ -72,7 +71,7 @@ document.body.addEventListener('click', (event) => {
     }) => {
         console.log("onScale scale", scale);
         target.style.transform = transform;
-        target.style.position = "absolute"
+        // target.style.position = "absolute";
     }).on("scaleEnd", ({ target, isDrag, clientX, clientY }) => {
         console.log("onScaleEnd", target, isDrag);
     });
@@ -83,7 +82,7 @@ document.body.addEventListener('click', (event) => {
     }).on("rotate", ({ target, beforeDelta, delta, dist, transform, clientX, clientY }) => {
         console.log("onRotate", dist);
         target.style.transform = transform;
-        target.style.position = "absolute"
+        // target.style.position = "absolute";
     }).on("rotateEnd", ({ target, isDrag, clientX, clientY }) => {
         console.log("onRotateEnd", target, isDrag);
     });
@@ -110,7 +109,7 @@ document.body.addEventListener('click', (event) => {
         // target.style.transform = transform;
         this.matrix = multiply(this.matrix, delta);
         target.style.transform = `matrix3d(${this.matrix.join(",")})`;
-        target.style.position = "absolute"
+        // target.style.position = "absolute";
     }).on("warpEnd", ({ target, isDrag, clientX, clientY }) => {
         console.log("onWarpEnd", target, isDrag);
     });

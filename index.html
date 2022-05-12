@@ -12,6 +12,15 @@
         height: 100vh
     }
 
+    #divContainerElement {
+        height: 60px;
+        width: 60px;
+        border: 1px solid lightgrey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     /* 
     #div3 {
         position: absolute;
@@ -19,17 +28,29 @@
         width: 100px;
         background-color: red;
     } */
+    #container,
+    #containerimg {
+        display: flex;
+        flex-wrap: wrap;
+    }
 </style>
 
 <body>
-    <div id="container"></div>
+    <div style="width:30%;">
+        <div id="container"></div>
+        <div id="containerimg"></div>
+    </div>
+
     <!-- <div id="div3" class="target"></div> -->
 
     <!-- <script src="//daybrush.com/moveable/release/latest/dist/moveable.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+        integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="moveable.js"></script>
     <script src="createobj.js"></script>
+    <script src="zetaindex.js"></script>
     <script src="script.js"></script>
 </body>
-
 
 </html>
