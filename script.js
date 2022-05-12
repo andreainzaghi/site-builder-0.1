@@ -4,9 +4,8 @@ document.body.addEventListener('click', (event) => {
 
     const idElement = event.target.id
 
-    if (event.target.tagName === 'BODY' && moveable) {
+    if ((event.target.tagName === 'BODY' || event.target.tagName === 'IMG' || event.target.tagName === 'DIV') && moveable) {
         moveable.destroy()
-        return
     }
 
     moveable = new Moveable(document.body, {
