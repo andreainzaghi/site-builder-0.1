@@ -30,7 +30,7 @@ document.body.addEventListener('click', (event) => {
         throttleRotate: 0,
     });
     /* draggable */
-
+    moveable.keepRatio = true;
     moveable.on("dragStart", ({ target, clientX, clientY }) => {
         console.log("onDragStart", target);
     }).on("drag", ({

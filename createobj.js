@@ -2,25 +2,34 @@ const contenitore = document.querySelector('#container');
 const contenitoreimg = document.querySelector('#containerimg');
 let ArrayImmagini = []
 
+let inputdiRicerca = document.querySelector('#input')
+
+function Ricerca() {
+    let match = inputdiRicerca.value;
+    console.log(match)
+    // getUser(match)
+    getUser(match).then((res) => {
+        const apiImage = (res.data.hits);
+        apiImage.forEach((x) => {
+            ArrayImmagini.push({ id: String(x.id), img: x.largeImageURL })
+            // console.log(ArrayImmagini)
+        })
+        ImageCreator()
+    });
+}
+
 async function getUser(search) {
     let response;
     try {
-        response = await axios.get('https://pixabay.com/api/?key=26732894-7ab7a716c214b455a08379fe1&q=yellow+flowers&image_type=photo&per_page=30');
+        response = await axios.get('https://pixabay.com/api/?key=26732894-7ab7a716c214b455a08379fe1&q=' + search + '&image_type=photo&per_page=30');
     } catch (error) {
         console.error(error);
     }
-
+    console.log(response)
     return response;
 }
 
-getUser().then((res) => {
-    const apiImage = (res.data.hits);
-    apiImage.forEach((x) => {
-        ArrayImmagini.push({ id: String(x.id), img: x.largeImageURL })
 
-    })
-    ImageCreator()
-});
 
 const Json = [
 
@@ -67,16 +76,20 @@ let Objectsdrag = (id, height, width, borderRadius, bgColor) => {
     obj.style.width = width + 'px';
     obj.style.borderRadius = borderRadius + '%';
     obj.style.backgroundColor = bgColor;
+    obj.addEventListener("dblclick", myScript);
     divContainerElement.appendChild(obj)
     contenitore.appendChild(divContainerElement);
 }
-
 
 Json.forEach((element) => {
 
     Objectsdrag(element.id, element.height, element.width, element.borderRadius, element.bgColor, element.marginTop);
 
 });
+function myScript() {
+    console.log('doppio click elemento')
+
+}
 let ImageCreator = () => {
     console.log(ArrayImmagini)
     ArrayImmagini.forEach((element) => {
@@ -90,9 +103,11 @@ let ImageCreator = () => {
         immagine.style.position = "absolute"
         immagine.style.width = "50px"
         immagine.id = element.id
+        immagine.addEventListener("dblclick", myScript);
         divContainerElement1.appendChild(immagine)
         contenitoreimg.appendChild(divContainerElement1);
 
     })
 }
 // console.log(ArrayImmagini)
+
